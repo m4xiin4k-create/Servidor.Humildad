@@ -1,5 +1,11 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 
+// ===== SERVIDOR WEB FALSO PARA RENDER =====
+require("http")
+  .createServer((req, res) => res.end("Bot activo"))
+  .listen(process.env.PORT || 3000);
+
+// ===== CONFIG DISCORD =====
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -10,28 +16,31 @@ const client = new Client({
 
 const TOKEN = process.env.TOKEN;
 
-// URL de tu servidor (la pondremos después)
+// 🔴 PONÉ ACA TU URL DEL SERVIDOR QUE ARRANCA MINECRAFT
 const SERVER_ENDPOINT = "URL_DE_TU_ENDPOINT";
 
+// ===== BOT READY =====
 client.once('clientReady', () => {
   console.log(`Bot listo como ${client.user.tag}`);
 });
 
+// ===== COMANDOS =====
 client.on('messageCreate', async msg => {
 
   if (msg.content === "!startmc") {
 
-    msg.reply("Enviando señal para arrancar servidor...");
+    await msg.reply("Enviando señal para arrancar servidor...");
 
     try {
       await fetch(`${SERVER_ENDPOINT}/start`);
-      msg.reply("Servidor iniciado 🚀");
+      await msg.reply("Servidor iniciado 🚀");
     } catch (err) {
       console.error(err);
-      msg.reply("Error al iniciar servidor ❌");
+      await msg.reply("Error al iniciar servidor ❌");
     }
   }
 
 });
 
+// ===== LOGIN =====
 client.login(TOKEN);
