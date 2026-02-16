@@ -1,0 +1,24 @@
+{
+  "name": "servidor.humildad",
+  "version": "1.0.0",
+  "description": "El server de los pibes, donde el técnico manda",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m4xiin4k-create/Servidor.Humildad.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/m4xiin4k-create/Servidor.Humildad/issues"
+  },
+  "homepage": "https://github.com/m4xiin4k-create/Servidor.Humildad#readme",
+  "dependencies": {
+    "discord.js": "^14.25.1"
+  }
+}
