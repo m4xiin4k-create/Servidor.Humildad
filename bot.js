@@ -17,7 +17,7 @@ const client = new Client({
 const TOKEN = process.env.TOKEN;
 
 // 🔴 PONÉ ACA TU URL DEL SERVIDOR QUE ARRANCA MINECRAFT
-const SERVER_ENDPOINT = "URL_DE_TU_ENDPOINT";
+const SERVER_ENDPOINT = "https://scaling-space-adventure-7vj6965qjx543r49p-3000.app.github.dev";
 
 // ===== BOT READY =====
 client.once('clientReady', () => {
