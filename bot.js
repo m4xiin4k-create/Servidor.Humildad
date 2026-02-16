@@ -1,5 +1,4 @@
 const { Client, GatewayIntentBits } = require('discord.js');
-const { spawn } = require('child_process');
 
 const client = new Client({
   intents: [
@@ -11,36 +10,28 @@ const client = new Client({
 
 const TOKEN = process.env.TOKEN;
 
+// URL de tu servidor (la pondremos después)
+const SERVER_ENDPOINT = "URL_DE_TU_ENDPOINT";
+
 client.once('clientReady', () => {
   console.log(`Bot listo como ${client.user.tag}`);
 });
 
-client.on('messageCreate', msg => {
+client.on('messageCreate', async msg => {
 
   if (msg.content === "!startmc") {
 
-    msg.reply("Arrancando servidor...");
+    msg.reply("Enviando señal para arrancar servidor...");
 
-    // Crafty
-    spawn("bash", ["/workspaces/Servidor.Humildad/minecraft/run_crafty.sh"], {
-      detached: true,
-      stdio: "ignore"
-    }).unref();
-
-    // playit
-    spawn("playit", [], {
-      detached: true,
-      stdio: "ignore"
-    }).unref();
-
-    // keep alive
-    spawn("bash", ["-c", "while true; do echo activo; sleep 60; done"], {
-      detached: true,
-      stdio: "ignore"
-    }).unref();
-
-    msg.reply("Servidor iniciado 🚀");
+    try {
+      await fetch(`${SERVER_ENDPOINT}/start`);
+      msg.reply("Servidor iniciado 🚀");
+    } catch (err) {
+      console.error(err);
+      msg.reply("Error al iniciar servidor ❌");
+    }
   }
 
 });
+
 client.login(TOKEN);
